@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstddef>
 using namespace std;
 
 int main(){
@@ -25,8 +26,10 @@ int main(){
     //cout << *pont1 << endl;
 
     int* pont2;
+    pont2 = NULL; 
+    // o ponteiro apontara para o vazio, mas apenas se colocarmos a biblioteca <cstddef>.
     cout << *pont2 << endl;
-    
+
 
 
     return 0;
