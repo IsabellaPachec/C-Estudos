@@ -140,6 +140,34 @@ sorteio_palavra()
     palavra_secreta = palavras[indice_sorteado];
 }
 
+void salva_arquivo(vector<string> nova_lista){
+    ofstream arquivo;
+    arquivo.open("palavras.txt");
+    if(arquivo.is_open()){
+        arquivo << nova_lista.size() << endl;
+        for (string palavra  : nova_lista)
+        {
+            arquivo << palavra << endl;
+        }
+        arquivo.close();
+    }
+    else{
+        cout << "não foi possivel acessar o banco de palavras" << endl;
+        exit(0);
+    }
+}
+
+void ad_palavra(){
+    cout << "Digite a nova palavra, usando letras maiúsculas." << endl;
+    string nova_palavra;
+    cin >> nova_palavra;
+
+    vector<string> lista_palavras = le_arquivo();
+    lista_palavras.push_back(nova_palavra);
+
+    salva_arquivo(lista_palavras);
+}
+
 int main()
 {
     imprime_cabecalho();
@@ -167,6 +195,13 @@ int main()
     {
         cout << "Parabens! Você acertou a palavra secreta!" << endl;
         cout << "A palavra secreta era: " << palavra_secreta << endl;
+
+        cout << "Você gostaria de adicionar uma nova palavra ao banco? (S/N) "; 
+        char resposta;
+        cin >> resposta;
+        if(resposta == 'S'){
+            ad_palavra();
+        }
     }
-    return 0;
+   
 }
