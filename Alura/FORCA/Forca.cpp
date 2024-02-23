@@ -79,14 +79,14 @@ void imprime_palavra()
     cout << endl;
 }
 
-chuta()
+char chuta()
 {
     cout << "Chute uma letra: ";
 
     char chute;
     cin >> chute;
 
-    chute = tolower(chute); // Convertendo chute para minúscula
+   chute = tolower(chute); // Convertendo chute para minúscula
     chutou[chute] = true;
 
     if (letra_existe(chute))
@@ -120,18 +120,18 @@ vector<string> le_arquivo()
             arquivo >> palavra_lida;
             palavras_arquivo.push_back(palavra_lida);
         }
-
-        arquivo.close();
-        return palavras_arquivo;
     }
 
-    else{
+    else
+    {
         cout << "não foi possivel acessar o banco de palavras" << endl;
         exit(0);
     }
+    arquivo.close();
+    return palavras_arquivo;
 }
 
-sorteio_palavra()
+int sorteio_palavra()
 {
     vector<string> palavras = le_arquivo();
     srand(time(NULL));
@@ -140,24 +140,28 @@ sorteio_palavra()
     palavra_secreta = palavras[indice_sorteado];
 }
 
-void salva_arquivo(vector<string> nova_lista){
+void salva_arquivo(vector<string> nova_lista)
+{
     ofstream arquivo;
     arquivo.open("palavras.txt");
-    if(arquivo.is_open()){
+    if (arquivo.is_open())
+    {
         arquivo << nova_lista.size() << endl;
-        for (string palavra  : nova_lista)
+        for (string palavra : nova_lista)
         {
             arquivo << palavra << endl;
         }
         arquivo.close();
     }
-    else{
+    else
+    {
         cout << "não foi possivel acessar o banco de palavras" << endl;
         exit(0);
     }
 }
 
-void ad_palavra(){
+void ad_palavra()
+{
     cout << "Digite a nova palavra, usando letras maiúsculas." << endl;
     string nova_palavra;
     cin >> nova_palavra;
@@ -196,12 +200,12 @@ int main()
         cout << "Parabens! Você acertou a palavra secreta!" << endl;
         cout << "A palavra secreta era: " << palavra_secreta << endl;
 
-        cout << "Você gostaria de adicionar uma nova palavra ao banco? (S/N) "; 
+        cout << "Você gostaria de adicionar uma nova palavra ao banco? (S/N) ";
         char resposta;
         cin >> resposta;
-        if(resposta == 'S'){
+        if (resposta == 'S')
+        {
             ad_palavra();
         }
     }
-   
 }
